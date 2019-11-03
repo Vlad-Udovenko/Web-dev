@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div ng-app="listTable" ng-controller="listTableController">
+        <div class="container m-auto">
+            <button class="btn btn-primary" ng-click="addUser = !addUser" ng-show="!addUser">Add User</button>
+            <button class="btn btn-danger" ng-click="addUser = !addUser" ng-show="addUser">Close</button>
+            <form class="listing-form" ng-if="addUser">
+                <h3>Add a Listing</h3>
+                <div class="row listing-form-row">
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon mr-2">Name</span>
+                            <input type="text" placeholder="Enter name" class="form-control" ng-model="newListing.name">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon mr-2">Surname</span>
+                            <input type="text" placeholder="Enter Surname" class="form-control"
+                                ng-model="newListing.surName">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon mr-2">Phone number</span>
+                            <input type="text" placeholder="Enter Phone number" class="form-control"
+                                ng-model="newListing.tel">
+                        </div>
+                    </div>
+                </div>
+                <div class="col listing-form-row">
+                    <button class="btn btn-primary listing-button mx-5" ng-click="addItem(newListing)"
+                        ng-show="!addListing">Add
+                    </button>
+                    <pre>{{newListing | json}}</pre>
+                </div>
+            </form>
+        </div>
+        <div class="well">
+            <table class="table  table-dark">
+                <caption>List of users</caption>
+                <tr>
+                    <th scope="col">N</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Sur Name</th>
+                    <th scope="col">Phone Number</th>
+                </tr>
+                <tr ng-repeat="item in list">
+                    <td scope="row">{{$index + 1}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.surName}}</td>
+                    <td>{{item.tel}}</td>
+                    <td class="btn btn-danger" ng-click="deleteItem(item)">X</td>
+                </tr>
+            </table>
+        </div>
+
+
+    </div>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="app.js"></script>
+    <script src="./scripts/listTableController.js"></script>
+    <script src="./scripts/listFactory.js"></script>
+</body>
+
+</html>
